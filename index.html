@@ -2,205 +2,85 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#18352d">
-  <meta name="description" content="A private group planner for an Italian road trip in July 2027.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#173d34">
+  <meta name="description" content="La Strada 2027 — a private collaborative planner for a family road trip through central and southern Italy.">
+  <meta name="color-scheme" content="light">
   <title>La Strada 2027</title>
   <link rel="preconnect" href="https://unpkg.com">
   <link rel="preconnect" href="https://tile.openstreetmap.org">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="v2-styles.css">
 </head>
 <body>
-  <section id="gate" class="gate" aria-label="Trip access">
+  <section id="gate" class="gate" aria-label="Private trip access">
     <img class="gate-art" src="assets/hero-roadtrip.svg" alt="A vintage car overlooking Italian hills with wine, cheese and olives">
-    <div class="gate-shade"></div>
-    <div class="gate-panel">
-      <p class="eyebrow">Rome to Puglia and back</p>
-      <h1>La Strada 2027</h1>
-      <p class="gate-copy">Enter the four-digit trip PIN.</p>
+    <div class="gate-overlay"></div>
+    <div class="gate-card">
+      <div class="gate-brand"><span>LS</span><p>LA STRADA<br><small>ITALY · JULY 2027</small></p></div>
+      <p class="kicker light">Rome to Matera and back</p>
+      <h1>One road.<br>Five beautiful bases.</h1>
+      <p class="gate-copy">A private place for W, N and L to compare, vote and shape the trip together.</p>
       <form id="pinForm" class="pin-form" autocomplete="off">
         <label class="sr-only" for="pinInput">Four-digit trip PIN</label>
         <input id="pinInput" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="••••" aria-describedby="pinMessage">
-        <button type="submit">Enter</button>
+        <button type="submit">Enter trip</button>
       </form>
       <p id="pinMessage" class="gate-message" role="status"></p>
     </div>
   </section>
 
   <section id="profileGate" class="profile-gate is-hidden" aria-label="Choose traveller">
-    <div class="profile-panel">
-      <p class="eyebrow">Who is planning?</p>
-      <h2>Choose your initial</h2>
+    <div class="profile-shell">
+      <p class="kicker light">Welcome to La Strada</p>
+      <h2>Who is planning?</h2>
+      <p>Your choice is remembered on this device.</p>
       <div class="profile-grid">
-        <button class="profile-choice" data-profile="W"><span>W</span><small>Administrator</small></button>
-        <button class="profile-choice" data-profile="N"><span>N</span><small>Traveller</small></button>
-        <button class="profile-choice" data-profile="L"><span>L</span><small>Traveller</small></button>
+        <button class="profile-card admin" data-profile="W"><span>W</span><strong>Administrator</strong><small>Can confirm group choices</small></button>
+        <button class="profile-card" data-profile="N"><span>N</span><strong>Traveller</strong><small>Equal vote</small></button>
+        <button class="profile-card" data-profile="L"><span>L</span><strong>Traveller</strong><small>Equal vote</small></button>
       </div>
     </div>
   </section>
 
   <div id="app" class="app is-hidden">
-    <header class="site-header">
-      <a class="brand" href="#overview" data-section-link="overview" aria-label="La Strada 2027 home">
+    <header class="topbar">
+      <button class="brand-button" data-view="trip" aria-label="Open trip board">
         <span class="brand-mark">LS</span>
         <span><strong>La Strada</strong><small>Italy · July 2027</small></span>
-      </a>
-      <button id="navToggle" class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
-      <nav id="mainNav" class="main-nav" aria-label="Main navigation">
-        <button data-section-link="overview" class="active">Overview</button>
-        <button data-section-link="routes">Route</button>
-        <button data-section-link="places">Places</button>
-        <button data-section-link="stays">Stays</button>
-        <button data-section-link="food">Food</button>
-        <button data-section-link="decisions">Votes</button>
-        <button data-section-link="suggestions">Suggest</button>
+      </button>
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <button data-view="trip">Trip board</button>
+        <button data-view="stays">Compare stays</button>
+        <button data-view="explore">Explore</button>
+        <button data-view="decisions">Decisions</button>
+        <button data-view="budget">Budget</button>
       </nav>
-      <div class="profile-chip">
-        <span id="activeInitial">W</span>
-        <div><strong id="activeRole">Administrator</strong><button id="switchProfile">Switch</button></div>
-      </div>
+      <button id="profileButton" class="profile-button" aria-label="Switch traveller">
+        <span id="profileInitial">W</span>
+        <span><strong id="profileRole">Administrator</strong><small>Switch</small></span>
+      </button>
     </header>
 
-    <main>
-      <section id="overview" class="page-section active">
-        <div class="hero-copy content-width">
-          <div>
-            <p class="eyebrow">Fewer hotels · longer stays · one shared plan</p>
-            <h2>Five bases from Rome to Matera and back</h2>
-            <p>The route now prioritises enjoying each region rather than packing up every morning. Vote on three accommodation candidates in every base, then decide which nearby sights deserve the time.</p>
-          </div>
-          <div class="trip-stat-grid">
-            <article><span>10</span><small>nights</small></article>
-            <article><span>5</span><small>accommodation bases</small></article>
-            <article><span>3</span><small>stay options per base</small></article>
-          </div>
-        </div>
+    <main id="viewRoot" tabindex="-1"></main>
 
-        <div class="content-width dashboard-grid">
-          <article class="panel map-panel">
-            <div class="panel-heading">
-              <div><p class="eyebrow">Recommended circuit</p><h3>Slower road map</h3></div>
-              <span class="status-pill">Five bases</span>
-            </div>
-            <div id="tripMap" aria-label="Map of the proposed Italian road trip"></div>
-          </article>
-
-          <aside class="panel dashboard-side">
-            <div class="panel-heading"><div><p class="eyebrow">Group progress</p><h3>Planning pulse</h3></div></div>
-            <div id="progressStats" class="progress-stats"></div>
-            <div class="divider"></div>
-            <h4>Leading choices</h4>
-            <div id="leadingChoices" class="mini-list"></div>
-          </aside>
-        </div>
-
-        <div class="content-width panel next-panel">
-          <div>
-            <p class="eyebrow">Current decision</p>
-            <h3>Which accommodation should win in each base?</h3>
-            <p>There are three named candidates for the mountain night, the Trabocchi coast, Gargano, Valle d’Itria and Matera.</p>
-          </div>
-          <button class="primary-button" data-section-link="stays">Compare stays</button>
-        </div>
-      </section>
-
-      <section id="routes" class="page-section content-width">
-        <div class="section-intro">
-          <p class="eyebrow">Recommended structure</p>
-          <h2>One slower route</h2>
-          <p>One spectacular mountain transit night, followed by two or three nights in each main region. Open the route card for the complete day-by-day outline.</p>
-        </div>
-        <div id="routesGrid" class="card-grid routes-grid"></div>
-      </section>
-
-      <section id="places" class="page-section content-width">
-        <div class="section-intro">
-          <p class="eyebrow">Nearby choices, not compulsory stops</p>
-          <h2>Things to see around the bases</h2>
-          <p>The attractions remain voteable, but they are now treated as day trips and transfer-day possibilities rather than reasons to change hotels.</p>
-        </div>
-        <div id="placeFilters" class="filter-row"></div>
-        <div id="placesGrid" class="card-grid"></div>
-      </section>
-
-      <section id="stays" class="page-section content-width">
-        <div class="section-intro split-intro">
-          <div>
-            <p class="eyebrow">Three candidates in every base</p>
-            <h2>Accommodation vote</h2>
-            <p>Prices are provisional per-night planning allowances for three adults and one child. Exact July 2027 dates may change availability and cost, so every option will be rechecked before booking.</p>
-          </div>
-          <div id="fxPanel" class="fx-panel"><span>Loading exchange rates…</span></div>
-        </div>
-        <div id="staysGrid" class="card-grid"></div>
-      </section>
-
-      <section id="food" class="page-section content-width">
-        <div class="section-intro">
-          <p class="eyebrow">Regional food</p>
-          <h2>What should we eat?</h2>
-          <p>Vote on memorable dishes and food experiences before choosing specific restaurants.</p>
-        </div>
-        <div id="foodGrid" class="card-grid"></div>
-      </section>
-
-      <section id="decisions" class="page-section content-width">
-        <div class="section-intro">
-          <p class="eyebrow">Shared decisions</p>
-          <h2>Voting dashboard</h2>
-          <p>The summary separates unanimous favourites, majority choices and unresolved options.</p>
-        </div>
-        <div id="decisionColumns" class="decision-columns"></div>
-      </section>
-
-      <section id="suggestions" class="page-section content-width">
-        <div class="section-intro">
-          <p class="eyebrow">Add another possibility</p>
-          <h2>Traveller suggestions</h2>
-          <p>W, N and L can add places, stays, food experiences or route ideas. W can remove any suggestion.</p>
-        </div>
-        <div class="suggestion-layout">
-          <form id="suggestionForm" class="panel suggestion-form">
-            <label>Category
-              <select id="suggestionCategory">
-                <option value="place">Place to see</option>
-                <option value="stay">Accommodation</option>
-                <option value="food">Food</option>
-                <option value="route">Route idea</option>
-              </select>
-            </label>
-            <label>Title
-              <input id="suggestionTitle" maxlength="80" required placeholder="For example: a boat trip from Vieste">
-            </label>
-            <label>Why should we consider it?
-              <textarea id="suggestionText" rows="5" maxlength="500" required placeholder="Add a short reason, link or useful detail."></textarea>
-            </label>
-            <label>Optional link
-              <input id="suggestionLink" type="url" placeholder="https://">
-            </label>
-            <button class="primary-button" type="submit">Add suggestion</button>
-          </form>
-          <div id="suggestionsList" class="suggestion-list"></div>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <span>La Strada 2027</span>
-      <span>Prototype storage: this browser</span>
-    </footer>
+    <nav class="mobile-nav" aria-label="Mobile navigation">
+      <button data-view="trip"><span>⌂</span>Trip</button>
+      <button data-view="stays"><span>▤</span>Stays</button>
+      <button data-view="explore"><span>◉</span>Explore</button>
+      <button data-view="decisions"><span>✓</span>Vote</button>
+      <button data-view="budget"><span>€</span>Budget</button>
+    </nav>
   </div>
 
-  <dialog id="itemDialog" class="item-dialog">
-    <button id="closeDialog" class="dialog-close" aria-label="Close">×</button>
-    <div id="dialogContent"></div>
+  <dialog id="detailSheet" class="detail-sheet">
+    <button id="closeSheet" class="sheet-close" aria-label="Close">×</button>
+    <div id="sheetContent"></div>
   </dialog>
 
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-  <script src="app.js"></script>
-  <script src="content-links.js"></script>
-  <script src="slow-route.js"></script>
-  <script src="dialog-fix.js"></script>
+  <script src="v2-app.js"></script>
 </body>
 </html>
