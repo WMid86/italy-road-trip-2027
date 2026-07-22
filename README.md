@@ -36,6 +36,10 @@ Because this is a public static repository, a client-side PIN is a casual privac
 
 ## Publishing
 
-Enable GitHub Pages in the repository settings and publish from the `main` branch root. The expected address will be:
+A GitHub Pages deployment workflow is included. In the repository, open:
+
+`Settings → Pages → Build and deployment → Source → GitHub Actions`
+
+After Pages is enabled, the expected address will be:
 
 `https://wmid86.github.io/italy-road-trip-2027/`
