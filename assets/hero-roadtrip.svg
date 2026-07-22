@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Italian road trip at sunset</title>
+  <desc id="desc">A vintage car overlooking Italian hills, with wine, cheese and olives prepared for a picnic.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#203449"/>
+      <stop offset="0.46" stop-color="#d77b57"/>
+      <stop offset="1" stop-color="#f5d5a7"/>
+    </linearGradient>
+    <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff3bf"/>
+      <stop offset="1" stop-color="#efad56"/>
+    </linearGradient>
+    <linearGradient id="hillsBack" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8c8e67"/>
+      <stop offset="1" stop-color="#566347"/>
+    </linearGradient>
+    <linearGradient id="hillsFront" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#485b3f"/>
+      <stop offset="1" stop-color="#26392f"/>
+    </linearGradient>
+    <linearGradient id="carPaint" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b54532"/>
+      <stop offset="0.55" stop-color="#7d241f"/>
+      <stop offset="1" stop-color="#491412"/>
+    </linearGradient>
+    <linearGradient id="road" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b89a73"/>
+      <stop offset="1" stop-color="#5d554b"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="1000" fill="url(#sky)"/>
+  <circle cx="1160" cy="245" r="112" fill="url(#sun)" opacity="0.95"/>
+  <circle cx="1160" cy="245" r="155" fill="#ffd47a" opacity="0.12" filter="url(#soft)"/>
+
+  <path d="M0 545 C180 455 300 490 455 420 C610 350 710 410 850 370 C1030 315 1160 390 1305 345 C1430 306 1530 330 1600 300 L1600 1000 L0 1000Z" fill="url(#hillsBack)"/>
+  <path d="M0 660 C175 565 350 615 505 530 C650 450 830 550 1010 455 C1180 365 1350 460 1600 390 L1600 1000 L0 1000Z" fill="url(#hillsFront)"/>
+
+  <g opacity="0.88">
+    <path d="M805 480 l34 -92 34 92z" fill="#d8c39e"/>
+    <rect x="817" y="480" width="44" height="78" rx="2" fill="#cbb38b"/>
+    <rect x="830" y="501" width="10" height="18" fill="#32423a"/>
+    <rect x="845" y="501" width="10" height="18" fill="#32423a"/>
+    <path d="M735 505 q82 -82 165 0 v58 H735z" fill="#e2d1ad"/>
+    <circle cx="817" cy="530" r="19" fill="#8b3b2e"/>
+    <path d="M706 565 q110 -45 220 0" fill="none" stroke="#304233" stroke-width="10" opacity="0.45"/>
+  </g>
+
+  <path d="M0 790 C250 720 360 748 545 705 C700 670 860 706 1040 650 C1260 580 1390 624 1600 565 L1600 1000 L0 1000Z" fill="url(#road)"/>
+  <path d="M0 813 C285 742 430 782 620 732 C870 667 1045 717 1240 642 C1400 581 1510 590 1600 580" fill="none" stroke="#ead9bd" stroke-width="9" opacity="0.42" stroke-dasharray="65 48"/>
+
+  <ellipse cx="747" cy="838" rx="410" ry="75" fill="#1e1d1b" opacity="0.42" filter="url(#shadow)"/>
+
+  <g transform="translate(315 500)">
+    <circle cx="245" cy="310" r="91" fill="#171a1c"/>
+    <circle cx="245" cy="310" r="50" fill="#b9a47b"/>
+    <circle cx="245" cy="310" r="21" fill="#4c4d49"/>
+    <circle cx="760" cy="310" r="91" fill="#171a1c"/>
+    <circle cx="760" cy="310" r="50" fill="#b9a47b"/>
+    <circle cx="760" cy="310" r="21" fill="#4c4d49"/>
+
+    <path d="M90 303 Q125 200 250 175 L410 145 Q495 82 635 90 L765 112 Q835 126 891 225 L930 262 Q950 280 940 310 L856 320 Q846 225 760 220 Q670 215 654 320 L349 320 Q340 221 247 220 Q158 220 145 320 L87 320 Q69 314 76 291Z" fill="url(#carPaint)" stroke="#3c1514" stroke-width="8"/>
+    <path d="M420 143 Q500 91 622 99 L730 116 L786 207 L365 207Z" fill="#8eb0bd" opacity="0.88" stroke="#e8d6b5" stroke-width="7"/>
+    <path d="M538 104 L536 205" stroke="#5b302b" stroke-width="8"/>
+    <path d="M727 119 L688 207" stroke="#5b302b" stroke-width="8"/>
+    <path d="M359 208 L787 208" stroke="#e5c799" stroke-width="8"/>
+    <path d="M383 225 L833 225" stroke="#571a17" stroke-width="5" opacity="0.5"/>
+    <path d="M100 280 L170 270" stroke="#f2d8a7" stroke-width="10" stroke-linecap="round"/>
+    <path d="M858 268 L927 284" stroke="#f6c681" stroke-width="14" stroke-linecap="round"/>
+    <rect x="437" y="294" width="148" height="42" rx="8" fill="#f2ead7" stroke="#342721" stroke-width="4"/>
+    <text x="511" y="324" text-anchor="middle" font-family="Georgia, serif" font-size="25" fill="#6d231d">ITALIA 27</text>
+    <path d="M155 233 Q500 270 869 226" fill="none" stroke="#c76849" stroke-width="8" opacity="0.8"/>
+    <ellipse cx="500" cy="249" rx="28" ry="8" fill="#e8c18f"/>
+    <path d="M457 166 q43 -25 86 0" fill="none" stroke="#4d2420" stroke-width="8"/>
+
+    <g transform="translate(410 34)">
+      <rect x="0" y="24" width="170" height="69" rx="12" fill="#806444" stroke="#3b2a1b" stroke-width="6"/>
+      <path d="M19 24 q65 -50 132 0" fill="none" stroke="#3b2a1b" stroke-width="10"/>
+      <path d="M19 57 H151 M52 24 V93 M112 24 V93" stroke="#ae8a5d" stroke-width="5" opacity="0.75"/>
+      <rect x="183" y="38" width="96" height="55" rx="10" fill="#5c6d4d" stroke="#2e3628" stroke-width="6"/>
+      <path d="M193 40 q35 -44 73 0" fill="none" stroke="#2e3628" stroke-width="9"/>
+    </g>
+  </g>
+
+  <g transform="translate(1110 650)">
+    <ellipse cx="152" cy="205" rx="260" ry="44" fill="#211d1a" opacity="0.34" filter="url(#shadow)"/>
+    <path d="M-20 75 Q145 15 325 91 L300 214 Q145 253 -35 185Z" fill="#d5b86f" opacity="0.92"/>
+    <path d="M5 82 L282 202 M69 55 L315 161 M-12 140 L222 230" stroke="#a94435" stroke-width="19" opacity="0.8"/>
+    <path d="M94 7 h39 v126 h-39z" fill="#53251f"/>
+    <path d="M101 -45 h25 v58 h-25z" fill="#6f3b29"/>
+    <rect x="93" y="40" width="42" height="53" rx="4" fill="#e8d3a1"/>
+    <path d="M179 76 q75 -36 122 22 q-55 78 -141 48z" fill="#f0d689" stroke="#9c7543" stroke-width="6"/>
+    <circle cx="240" cy="111" r="10" fill="#b89452"/>
+    <circle cx="267" cy="124" r="7" fill="#b89452"/>
+    <circle cx="218" cy="132" r="8" fill="#b89452"/>
+    <ellipse cx="34" cy="127" rx="65" ry="31" fill="#6f7b42" stroke="#343d25" stroke-width="5"/>
+    <circle cx="3" cy="121" r="11" fill="#27371f"/>
+    <circle cx="29" cy="136" r="10" fill="#344b29"/>
+    <circle cx="52" cy="117" r="12" fill="#27371f"/>
+    <circle cx="70" cy="138" r="9" fill="#3b512c"/>
+    <circle cx="-18" cy="139" r="9" fill="#35492a"/>
+    <path d="M330 112 q34 -80 60 -1 q-28 33 -60 1z" fill="#6e2c22" opacity="0.9"/>
+    <path d="M363 54 v55" stroke="#e3d8c7" stroke-width="5"/>
+    <ellipse cx="363" cy="48" rx="32" ry="13" fill="none" stroke="#e3d8c7" stroke-width="5"/>
+    <ellipse cx="363" cy="112" rx="21" ry="8" fill="none" stroke="#e3d8c7" stroke-width="5"/>
+  </g>
+
+  <g opacity="0.78" fill="#162a23">
+    <path d="M122 674 q22 -135 48 0 q-23 45 -48 0z"/>
+    <rect x="143" y="664" width="7" height="86"/>
+    <path d="M148 615 q78 -38 118 35 q-72 34 -118 -35z"/>
+    <path d="M144 627 q-70 -27 -102 36 q66 26 102 -36z"/>
+    <circle cx="210" cy="637" r="8" fill="#1d1712"/>
+    <circle cx="81" cy="651" r="8" fill="#1d1712"/>
+  </g>
+
+  <rect width="1600" height="1000" fill="#10202c" opacity="0.08"/>
+</svg>
