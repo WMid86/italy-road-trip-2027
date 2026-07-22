@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#18352d">
+  <meta name="description" content="A private group planner for an Italian road trip in July 2027.">
+  <title>La Strada 2027</title>
+  <link rel="preconnect" href="https://unpkg.com">
+  <link rel="preconnect" href="https://tile.openstreetmap.org">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <section id="gate" class="gate" aria-label="Trip access">
+    <img class="gate-art" src="assets/hero-roadtrip.svg" alt="A vintage car overlooking Italian hills with wine, cheese and olives">
+    <div class="gate-shade"></div>
+    <div class="gate-panel">
+      <p class="eyebrow">Rome to Puglia and back</p>
+      <h1>La Strada 2027</h1>
+      <p class="gate-copy">Enter the four-digit trip PIN.</p>
+      <form id="pinForm" class="pin-form" autocomplete="off">
+        <label class="sr-only" for="pinInput">Four-digit trip PIN</label>
+        <input id="pinInput" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="••••" aria-describedby="pinMessage">
+        <button type="submit">Enter</button>
+      </form>
+      <p id="pinMessage" class="gate-message" role="status"></p>
+    </div>
+  </section>
+
+  <section id="profileGate" class="profile-gate is-hidden" aria-label="Choose traveller">
+    <div class="profile-panel">
+      <p class="eyebrow">Who is planning?</p>
+      <h2>Choose your initial</h2>
+      <div class="profile-grid">
+        <button class="profile-choice" data-profile="W"><span>W</span><small>Administrator</small></button>
+        <button class="profile-choice" data-profile="N"><span>N</span><small>Traveller</small></button>
+        <button class="profile-choice" data-profile="L"><span>L</span><small>Traveller</small></button>
+      </div>
+    </div>
+  </section>
+
+  <div id="app" class="app is-hidden">
+    <header class="site-header">
+      <a class="brand" href="#overview" data-section-link="overview" aria-label="La Strada 2027 home">
+        <span class="brand-mark">LS</span>
+        <span><strong>La Strada</strong><small>Italy · July 2027</small></span>
+      </a>
+      <button id="navToggle" class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+      <nav id="mainNav" class="main-nav" aria-label="Main navigation">
+        <button data-section-link="overview" class="active">Overview</button>
+        <button data-section-link="routes">Routes</button>
+        <button data-section-link="places">Places</button>
+        <button data-section-link="stays">Stays</button>
+        <button data-section-link="food">Food</button>
+        <button data-section-link="decisions">Votes</button>
+        <button data-section-link="suggestions">Suggest</button>
+      </nav>
+      <div class="profile-chip">
+        <span id="activeInitial">W</span>
+        <div><strong id="activeRole">Administrator</strong><button id="switchProfile">Switch</button></div>
+      </div>
+    </header>
+
+    <main>
+      <section id="overview" class="page-section active">
+        <div class="hero-copy content-width">
+          <div>
+            <p class="eyebrow">Three travellers · one shared plan</p>
+            <h2>Rome, the Adriatic road, Puglia and Matera</h2>
+            <p>Compare routes, vote on the places that matter, shortlist countryside stays and build a final 10–12 day itinerary.</p>
+          </div>
+          <div class="trip-stat-grid">
+            <article><span>10–12</span><small>days</small></article>
+            <article><span>3</span><small>equal voters</small></article>
+            <article><span>Rome</span><small>start and finish</small></article>
+          </div>
+        </div>
+
+        <div class="content-width dashboard-grid">
+          <article class="panel map-panel">
+            <div class="panel-heading">
+              <div><p class="eyebrow">Provisional circuit</p><h3>Road map</h3></div>
+              <span class="status-pill">Editable</span>
+            </div>
+            <div id="tripMap" aria-label="Map of the proposed Italian road trip"></div>
+          </article>
+
+          <aside class="panel dashboard-side">
+            <div class="panel-heading"><div><p class="eyebrow">Group progress</p><h3>Planning pulse</h3></div></div>
+            <div id="progressStats" class="progress-stats"></div>
+            <div class="divider"></div>
+            <h4>Leading choices</h4>
+            <div id="leadingChoices" class="mini-list"></div>
+          </aside>
+        </div>
+
+        <div class="content-width panel next-panel">
+          <div>
+            <p class="eyebrow">Current question</p>
+            <h3>Which style of trip should lead?</h3>
+            <p>Vote on the route concepts first. The detailed itinerary will adapt to the winner.</p>
+          </div>
+          <button class="primary-button" data-section-link="routes">Compare routes</button>
+        </div>
+      </section>
+
+      <section id="routes" class="page-section content-width">
+        <div class="section-intro">
+          <p class="eyebrow">Route alternatives</p>
+          <h2>Three ways south</h2>
+          <p>Each version starts and ends in Rome. Driving times are planning estimates and will be refined when dates and accommodation are fixed.</p>
+        </div>
+        <div id="routesGrid" class="card-grid routes-grid"></div>
+      </section>
+
+      <section id="places" class="page-section content-width">
+        <div class="section-intro">
+          <p class="eyebrow">Ancient sites, landscapes and towns</p>
+          <h2>Things to see</h2>
+          <p>Filter the list, open an option, vote and leave a comment.</p>
+        </div>
+        <div id="placeFilters" class="filter-row"></div>
+        <div id="placesGrid" class="card-grid"></div>
+      </section>
+
+      <section id="stays" class="page-section content-width">
+        <div class="section-intro split-intro">
+          <div>
+            <p class="eyebrow">Agriturismi, masserie and country stays</p>
+            <h2>Accommodation areas</h2>
+            <p>Prices are shown per night for the group. Live accommodation options can be added and refreshed as July 2027 availability appears.</p>
+          </div>
+          <div id="fxPanel" class="fx-panel"><span>Loading exchange rates…</span></div>
+        </div>
+        <div id="staysGrid" class="card-grid"></div>
+      </section>
+
+      <section id="food" class="page-section content-width">
+        <div class="section-intro">
+          <p class="eyebrow">Regional food</p>
+          <h2>What should we eat?</h2>
+          <p>Vote on memorable dishes and food experiences before choosing specific restaurants.</p>
+        </div>
+        <div id="foodGrid" class="card-grid"></div>
+      </section>
+
+      <section id="decisions" class="page-section content-width">
+        <div class="section-intro">
+          <p class="eyebrow">Shared decisions</p>
+          <h2>Voting dashboard</h2>
+          <p>The summary separates unanimous favourites, majority choices and unresolved options.</p>
+        </div>
+        <div id="decisionColumns" class="decision-columns"></div>
+      </section>
+
+      <section id="suggestions" class="page-section content-width">
+        <div class="section-intro">
+          <p class="eyebrow">Add another possibility</p>
+          <h2>Traveller suggestions</h2>
+          <p>W, N and L can add places, stays, food experiences or route ideas. W can remove any suggestion.</p>
+        </div>
+        <div class="suggestion-layout">
+          <form id="suggestionForm" class="panel suggestion-form">
+            <label>Category
+              <select id="suggestionCategory">
+                <option value="place">Place to see</option>
+                <option value="stay">Accommodation</option>
+                <option value="food">Food</option>
+                <option value="route">Route idea</option>
+              </select>
+            </label>
+            <label>Title
+              <input id="suggestionTitle" maxlength="80" required placeholder="For example: a boat trip from Vieste">
+            </label>
+            <label>Why should we consider it?
+              <textarea id="suggestionText" rows="5" maxlength="500" required placeholder="Add a short reason, link or useful detail."></textarea>
+            </label>
+            <label>Optional link
+              <input id="suggestionLink" type="url" placeholder="https://">
+            </label>
+            <button class="primary-button" type="submit">Add suggestion</button>
+          </form>
+          <div id="suggestionsList" class="suggestion-list"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>La Strada 2027</span>
+      <span>Prototype storage: this browser</span>
+    </footer>
+  </div>
+
+  <dialog id="itemDialog" class="item-dialog">
+    <button id="closeDialog" class="dialog-close" aria-label="Close">×</button>
+    <div id="dialogContent"></div>
+  </dialog>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="app.js"></script>
+</body>
+</html>
