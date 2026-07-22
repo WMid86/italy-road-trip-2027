@@ -49,7 +49,7 @@
       <button id="navToggle" class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
       <nav id="mainNav" class="main-nav" aria-label="Main navigation">
         <button data-section-link="overview" class="active">Overview</button>
-        <button data-section-link="routes">Routes</button>
+        <button data-section-link="routes">Route</button>
         <button data-section-link="places">Places</button>
         <button data-section-link="stays">Stays</button>
         <button data-section-link="food">Food</button>
@@ -66,22 +66,22 @@
       <section id="overview" class="page-section active">
         <div class="hero-copy content-width">
           <div>
-            <p class="eyebrow">Three travellers · one shared plan</p>
-            <h2>Rome, the Adriatic road, Puglia and Matera</h2>
-            <p>Compare routes, vote on the places that matter, shortlist countryside stays and build a final 10–12 day itinerary.</p>
+            <p class="eyebrow">Fewer hotels · longer stays · one shared plan</p>
+            <h2>Five bases from Rome to Matera and back</h2>
+            <p>The route now prioritises enjoying each region rather than packing up every morning. Vote on three accommodation candidates in every base, then decide which nearby sights deserve the time.</p>
           </div>
           <div class="trip-stat-grid">
-            <article><span>10–12</span><small>days</small></article>
-            <article><span>3</span><small>equal voters</small></article>
-            <article><span>Rome</span><small>start and finish</small></article>
+            <article><span>10</span><small>nights</small></article>
+            <article><span>5</span><small>accommodation bases</small></article>
+            <article><span>3</span><small>stay options per base</small></article>
           </div>
         </div>
 
         <div class="content-width dashboard-grid">
           <article class="panel map-panel">
             <div class="panel-heading">
-              <div><p class="eyebrow">Provisional circuit</p><h3>Road map</h3></div>
-              <span class="status-pill">Editable</span>
+              <div><p class="eyebrow">Recommended circuit</p><h3>Slower road map</h3></div>
+              <span class="status-pill">Five bases</span>
             </div>
             <div id="tripMap" aria-label="Map of the proposed Italian road trip"></div>
           </article>
@@ -97,28 +97,28 @@
 
         <div class="content-width panel next-panel">
           <div>
-            <p class="eyebrow">Current question</p>
-            <h3>Which style of trip should lead?</h3>
-            <p>Vote on the route concepts first. The detailed itinerary will adapt to the winner.</p>
+            <p class="eyebrow">Current decision</p>
+            <h3>Which accommodation should win in each base?</h3>
+            <p>There are three named candidates for the mountain night, the Trabocchi coast, Gargano, Valle d’Itria and Matera.</p>
           </div>
-          <button class="primary-button" data-section-link="routes">Compare routes</button>
+          <button class="primary-button" data-section-link="stays">Compare stays</button>
         </div>
       </section>
 
       <section id="routes" class="page-section content-width">
         <div class="section-intro">
-          <p class="eyebrow">Route alternatives</p>
-          <h2>Three ways south</h2>
-          <p>Each version starts and ends in Rome. Driving times are planning estimates and will be refined when dates and accommodation are fixed.</p>
+          <p class="eyebrow">Recommended structure</p>
+          <h2>One slower route</h2>
+          <p>One spectacular mountain transit night, followed by two or three nights in each main region. Open the route card for the complete day-by-day outline.</p>
         </div>
         <div id="routesGrid" class="card-grid routes-grid"></div>
       </section>
 
       <section id="places" class="page-section content-width">
         <div class="section-intro">
-          <p class="eyebrow">Ancient sites, landscapes and towns</p>
-          <h2>Things to see</h2>
-          <p>Filter the list, open an option, vote and leave a comment.</p>
+          <p class="eyebrow">Nearby choices, not compulsory stops</p>
+          <h2>Things to see around the bases</h2>
+          <p>The attractions remain voteable, but they are now treated as day trips and transfer-day possibilities rather than reasons to change hotels.</p>
         </div>
         <div id="placeFilters" class="filter-row"></div>
         <div id="placesGrid" class="card-grid"></div>
@@ -127,9 +127,9 @@
       <section id="stays" class="page-section content-width">
         <div class="section-intro split-intro">
           <div>
-            <p class="eyebrow">Agriturismi, masserie and country stays</p>
-            <h2>Accommodation areas</h2>
-            <p>Prices are shown per night for the group. Live accommodation options can be added and refreshed as July 2027 availability appears.</p>
+            <p class="eyebrow">Three candidates in every base</p>
+            <h2>Accommodation vote</h2>
+            <p>Prices are provisional per-night planning allowances for three adults and one child. Exact July 2027 dates may change availability and cost, so every option will be rechecked before booking.</p>
           </div>
           <div id="fxPanel" class="fx-panel"><span>Loading exchange rates…</span></div>
         </div>
@@ -199,6 +199,8 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script src="app.js"></script>
+  <script src="content-links.js"></script>
+  <script src="slow-route.js"></script>
   <script src="dialog-fix.js"></script>
 </body>
 </html>
