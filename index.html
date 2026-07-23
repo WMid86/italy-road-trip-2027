@@ -4,13 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#173d34">
-  <meta name="description" content="La Strada 2027 — a private collaborative planner for a family road trip through central and southern Italy.">
+  <meta name="description" content="La Strada 2027 — compare three beautiful family road-trip routes through central and southern Italy.">
   <meta name="color-scheme" content="light">
   <title>La Strada 2027</title>
   <link rel="preconnect" href="https://unpkg.com">
   <link rel="preconnect" href="https://tile.openstreetmap.org">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
   <link rel="stylesheet" href="v2-styles.css">
+  <link rel="stylesheet" href="route-options.css">
 </head>
 <body>
   <section id="gate" class="gate" aria-label="Private trip access">
@@ -18,9 +19,9 @@
     <div class="gate-overlay"></div>
     <div class="gate-card">
       <div class="gate-brand"><span>LS</span><p>LA STRADA<br><small>ITALY · JULY 2027</small></p></div>
-      <p class="kicker light">Rome to Matera and back</p>
-      <h1>One road.<br>Five beautiful bases.</h1>
-      <p class="gate-copy">A private place for W, N and L to compare, vote and shape the trip together.</p>
+      <p class="kicker light">Rome to southern Italy and back</p>
+      <h1>Three roads.<br>One unforgettable trip.</h1>
+      <p class="gate-copy">Compare the mountain-and-Adriatic route, the straight-south route and the slower hill-country route before W, N and L choose together.</p>
       <form id="pinForm" class="pin-form" autocomplete="off">
         <label class="sr-only" for="pinInput">Four-digit trip PIN</label>
         <input id="pinInput" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="••••" aria-describedby="pinMessage">
@@ -45,12 +46,13 @@
 
   <div id="app" class="app is-hidden">
     <header class="topbar">
-      <button class="brand-button" data-view="trip" aria-label="Open trip board">
+      <button class="brand-button" data-view="routes" aria-label="Open route comparison">
         <span class="brand-mark">LS</span>
         <span><strong>La Strada</strong><small>Italy · July 2027</small></span>
       </button>
       <nav class="desktop-nav" aria-label="Main navigation">
-        <button data-view="trip">Trip board</button>
+        <button data-view="routes">Compare routes</button>
+        <button data-view="trip">East-route draft</button>
         <button data-view="stays">Compare stays</button>
         <button data-view="explore">Explore</button>
         <button data-view="decisions">Decisions</button>
@@ -65,9 +67,9 @@
     <main id="viewRoot" tabindex="-1"></main>
 
     <nav class="mobile-nav" aria-label="Mobile navigation">
+      <button data-view="routes"><span>⇆</span>Routes</button>
       <button data-view="trip"><span>⌂</span>Trip</button>
       <button data-view="stays"><span>▤</span>Stays</button>
-      <button data-view="explore"><span>◉</span>Explore</button>
       <button data-view="decisions"><span>✓</span>Vote</button>
       <button data-view="budget"><span>€</span>Budget</button>
     </nav>
@@ -82,5 +84,6 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script src="v2-app.js"></script>
+  <script src="route-options.js"></script>
 </body>
 </html>
